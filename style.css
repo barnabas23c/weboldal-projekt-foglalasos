@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&family=IBM+Plex+Sans+Devanagari:wght@100;200;300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Kedebideri:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --hatter-navbar: lightblue;
+    --hatter-footer: lightblue;
+    --hatter-main: #5689b8;
+}
+
+* {
+    font-family: 'Clarity City';
+    box-sizing: border-box;
+}
+
+/* ----- NAVBAR ----- */
+.navbar {
+    background-color: var(--hatter-navbar);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+/* ----- MAIN ----- */
+main {
+    background-color: var(--hatter-main);
+}
+
+/* ----- NAVBAR ----- */
+footer {
+    background-color: var(--hatter-footer);
+}

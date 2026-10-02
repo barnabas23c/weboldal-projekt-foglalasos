@@ -1,0 +1,17 @@
+[
+    {
+        "nev": "Nagy Balász",
+        "email" : "nagy.balazs@gmail.com",
+        "telefonszam" : "",
+        "idopont" : {
+            "ev" : 2026,
+            "honap": 11,
+            "nap": 18,
+            "ora": 15
+        },
+        "fodrasz": 0,
+        "szolgaltatas": 0
+    }
+
+
+]

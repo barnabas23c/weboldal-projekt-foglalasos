@@ -1,0 +1,22 @@
+[
+    {
+        "szolgaltatas": "Hajvágás",
+        "ar": 6000,
+        "ido": 45
+    },
+    {
+        "szolgaltatas": "Szakállvágás",
+        "ar": 4000,
+        "ido": 15
+    },
+    {
+        "szolgaltatas": "Hajvágás+Szakállvágás",
+        "ar": 9000,
+        "ido": 60
+    },
+    {
+        "szolgaltatas": "Hajfestés+(hajvágással)",
+        "ar": 15000,
+        "ido": 150
+    }
+]

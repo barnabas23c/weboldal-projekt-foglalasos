@@ -1,0 +1,38 @@
+[
+    {
+    "neve" : "Szabó Bence",
+    "telefonszam" : "+3620567956",
+    "rating": 4.3
+
+    },
+    {
+    "neve" : "Vajda Levente",
+    "telefonszam" : "+36303348445",
+    "rating": 4.4
+
+    },
+    {
+    "neve" : "Horváth Ádám",
+    "telefonszam" : "+36204792255",
+    "rating": 4.7
+
+    },
+    {
+    "neve" : "Tamás Gábor",
+    "telefonszam" : "+3650689367",
+    "rating": 4.3
+
+    },
+    {
+    "neve" : "Bocskai Áron",
+    "telefonszam" : "+3630304956",
+    "rating": 4.5
+
+    },
+    {
+    "neve" : "Hankó Balázs",
+    "telefonszam" : "+36302794364",
+    "rating": 4.1
+
+    }
+]

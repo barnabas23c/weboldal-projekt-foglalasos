@@ -1,17 +1,225 @@
 [
     {
-        "nev": "Nagy Balász",
-        "email" : "nagy.balazs@gmail.com",
-        "telefonszam" : "",
-        "idopont" : {
-            "ev" : 2026,
+        "nev": "Nagy Balázs",
+        "email": "nagy.balazs@gmail.com",
+        "telefonszam": "+36301234567",
+        "idopont": {
+            "ev": 2026,
             "honap": 11,
             "nap": 18,
             "ora": 15
         },
         "fodrasz": 0,
         "szolgaltatas": 0
+    },
+    {
+        "nev": "Kiss Péter",
+        "email": "kiss.peter@gmail.com",
+        "telefonszam": "+36302145678",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 18,
+            "ora": 10
+        },
+        "fodrasz": 1,
+        "szolgaltatas": 1
+    },
+    {
+        "nev": "Szabó Márk",
+        "email": "szabo.mark@gmail.com",
+        "telefonszam": "+36303214567",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 18,
+            "ora": 13
+        },
+        "fodrasz": 2,
+        "szolgaltatas": 2
+    },
+    {
+        "nev": "Tóth Ádám",
+        "email": "toth.adam@gmail.com",
+        "telefonszam": "+36304325678",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 19,
+            "ora": 9
+        },
+        "fodrasz": 3,
+        "szolgaltatas": 0
+    },
+    {
+        "nev": "Varga Bence",
+        "email": "varga.bence@gmail.com",
+        "telefonszam": "+36305436789",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 19,
+            "ora": 14
+        },
+        "fodrasz": 4,
+        "szolgaltatas": 3
+    },
+    {
+        "nev": "Kovács Dániel",
+        "email": "kovacs.daniel@gmail.com",
+        "telefonszam": "+36306547890",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 19,
+            "ora": 16
+        },
+        "fodrasz": 5,
+        "szolgaltatas": 1
+    },
+    {
+        "nev": "Horváth Levente",
+        "email": "horvath.levente@gmail.com",
+        "telefonszam": "+36307658901",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 20,
+            "ora": 10
+        },
+        "fodrasz": 0,
+        "szolgaltatas": 2
+    },
+    {
+        "nev": "Molnár Gergő",
+        "email": "molnar.gergo@gmail.com",
+        "telefonszam": "+36308769012",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 20,
+            "ora": 12
+        },
+        "fodrasz": 1,
+        "szolgaltatas": 0
+    },
+    {
+        "nev": "Farkas Dávid",
+        "email": "farkas.david@gmail.com",
+        "telefonszam": "+36309870123",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 20,
+            "ora": 15
+        },
+        "fodrasz": 2,
+        "szolgaltatas": 3
+    },
+    {
+        "nev": "Balogh Máté",
+        "email": "balogh.mate@gmail.com",
+        "telefonszam": "+36301122334",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 21,
+            "ora": 9
+        },
+        "fodrasz": 3,
+        "szolgaltatas": 1
+    },
+    {
+        "nev": "Lakatos Áron",
+        "email": "lakatos.aron@gmail.com",
+        "telefonszam": "+36302233445",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 21,
+            "ora": 11
+        },
+        "fodrasz": 4,
+        "szolgaltatas": 2
+    },
+    {
+        "nev": "Takács Zoltán",
+        "email": "takacs.zoltan@gmail.com",
+        "telefonszam": "+36303344556",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 21,
+            "ora": 16
+        },
+        "fodrasz": 5,
+        "szolgaltatas": 0
+    },
+    {
+        "nev": "Németh Kristóf",
+        "email": "nemeth.kristof@gmail.com",
+        "telefonszam": "+36304455667",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 22,
+            "ora": 10
+        },
+        "fodrasz": 0,
+        "szolgaltatas": 3
+    },
+    {
+        "nev": "Papp Roland",
+        "email": "papp.roland@gmail.com",
+        "telefonszam": "+36305566778",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 22,
+            "ora": 13
+        },
+        "fodrasz": 3,
+        "szolgaltatas": 2
+    },
+    {
+        "nev": "Simon András",
+        "email": "simon.andras@gmail.com",
+        "telefonszam": "+36306677889",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 22,
+            "ora": 17
+        },
+        "fodrasz": 5,
+        "szolgaltatas": 1
     }
 
-
+    ,
+{
+    "nev": "Kelemen Norbert",
+    "email": "kelemen.norbert@gmail.com",
+    "telefonszam": "+36307788990",
+    "idopont": {
+        "ev": 2026,
+        "honap": 11,
+        "nap": 23,
+        "ora": 11
+    },
+    "fodrasz": 2,
+    "szolgaltatas": 0
+},
+{
+    "nev": "Oláh Gábor",
+    "email": "olah.gabor@gmail.com",
+    "telefonszam": "+36308899001",
+    "idopont": {
+        "ev": 2026,
+        "honap": 11,
+        "nap": 23,
+        "ora": 15
+    },
+    "fodrasz": 4,
+    "szolgaltatas": 1
+}
 ]

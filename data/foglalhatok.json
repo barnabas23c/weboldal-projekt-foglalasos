@@ -1,0 +1,44 @@
+[
+    {
+        "nap": "hétfő",
+        "kezdes": 9,
+        "vege": 17,
+        "szunetKezdes": 12,
+        "szunetVege": 13
+    },
+    {
+        "nap": "kedd",
+        "kezdes": 9,
+        "vege": 17,
+        "szunetKezdes": 12,
+        "szunetVege": 13
+    },
+    {
+        "nap": "szerda",
+        "kezdes": 9,
+        "vege": 17,
+        "szunetKezdes": 12,
+        "szunetVege": 13
+    },
+    {
+        "nap": "csütörtök",
+        "kezdes": 9,
+        "vege": 17,
+        "szunetKezdes": 12,
+        "szunetVege": 13
+    },
+    {
+        "nap": "péntek",
+        "kezdes": 9,
+        "vege": 18,
+        "szunetKezdes": 12,
+        "szunetVege": 13
+    },
+    {
+        "nap": "szombat",
+        "kezdes": 9,
+        "vege": 14,
+        "szunetKezdes": 0,
+        "szunetVege": 0
+    }
+]

@@ -14,8 +14,10 @@ Zsombi:
 - JSON Fájlok feltöltése
 - Oldal alapstruktúra
 - Betűtípus
+- Foglaláskezelő (admin) oldal
 
 Barni:
 - Navbar, footer HTML + CSS
 - TODO: foglalások naptár nézet
+- Foglalás oldal (űrlap)
 

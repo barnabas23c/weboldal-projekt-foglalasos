@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="./style.css">
     <title>BaZsi Borbély Szalon - Foglalás</title>
+    <script src="./index.js" defer></script>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-sm sticky-top">
         <div class="container-fluid">
@@ -23,7 +29,7 @@
                         <a class="nav-link" aria-current="page" href="/">Kezdőlap</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Foglalás</a>
+                        <a class="nav-link active" href="/foglalas/#">Foglalás</a>
                     </li>
                 </ul>
             </div>
@@ -31,10 +37,42 @@
     </nav>
     <main>
         <h1>Foglalás</h1>
+        <div class="card">
+            <form class="card-body d-grid gap-3 align-items-center" style="grid-template-columns: max-content auto;">
+                <label for="nev" class="form-label m-0">Név:</label>
+                <input type="text" id="nev" placeholder="Vezetéknév Keresztnév" class="form-control">
+                <label for="email" class="form-label m-0">Email:</label>
+                <input type="email" id="email" placeholder="email@szolgaltato.hu" class="form-control">
+                <label for="tel" class="form-label m-0">Telefonszám:</label>
+                <input type="tel" id="tel" placeholder="+36 00 000 0000" class="form-control">
+                <label for="datum" class="form-label m-0">Dátum:</label>
+                <input type="date" id="datum" class="form-control">
+                <label for="fodrasz" class="form-label m-0">Fodrász:</label>
+                <select id="fodrasz" class="form-select">
+                    <option name="">-- Válassz fodrászt --</option>
+                </select>
+                <label for="szolgaltatas" class="form-label m-0">Szolgáltatás:</label>
+                <select id="szolgaltatas" class="form-select">
+                    <option name="">-- Válassz szolgáltatást --</option>
+                </select>
+                <div style="grid-column: span 2;">
+                    <p>
+                        Ár: <span id="ar">-</span><br>
+                        Áfa: <span id="afa">-</span><br>
+                        Végösszeg: <span id="vegosszeg">-</span>
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <input id="foglalas" type="button" class="btn btn-primary px-5 py-2" value="Foglalás">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="alert alert-danger my-2 px-3 py-3" role="alert" id="formerr" style="display: none;"></div>
     </main>
     <footer class="d-flex justify-content-between p-2">
         <span>BaZsi Borbély Szalon ©</span>
         <span>Készítette: Holcsek Zsombor, Uglik Barnabás</span>
     </footer>
 </body>
+
 </html>

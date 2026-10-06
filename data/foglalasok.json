@@ -193,33 +193,31 @@
         },
         "fodrasz": 5,
         "szolgaltatas": 1
+    },
+    {
+        "nev": "Kelemen Norbert",
+        "email": "kelemen.norbert@gmail.com",
+        "telefonszam": "+36307788990",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 23,
+            "ora": 11
+        },
+        "fodrasz": 2,
+        "szolgaltatas": 0
+    },
+    {
+        "nev": "Oláh Gábor",
+        "email": "olah.gabor@gmail.com",
+        "telefonszam": "+36308899001",
+        "idopont": {
+            "ev": 2026,
+            "honap": 11,
+            "nap": 23,
+            "ora": 15
+        },
+        "fodrasz": 4,
+        "szolgaltatas": 1
     }
-
-    ,
-{
-    "nev": "Kelemen Norbert",
-    "email": "kelemen.norbert@gmail.com",
-    "telefonszam": "+36307788990",
-    "idopont": {
-        "ev": 2026,
-        "honap": 11,
-        "nap": 23,
-        "ora": 11
-    },
-    "fodrasz": 2,
-    "szolgaltatas": 0
-},
-{
-    "nev": "Oláh Gábor",
-    "email": "olah.gabor@gmail.com",
-    "telefonszam": "+36308899001",
-    "idopont": {
-        "ev": 2026,
-        "honap": 11,
-        "nap": 23,
-        "ora": 15
-    },
-    "fodrasz": 4,
-    "szolgaltatas": 1
-}
 ]

@@ -90,7 +90,7 @@ const betolt = () => {
 
                             <p>
                                 <b>Fodrász:</b>
-                                ${fodraszok[data.fodrasz].neve}
+                                ${fodraszok[data.fodrasz].nev}
                             </p>
 
                             <p>

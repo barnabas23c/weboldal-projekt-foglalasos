@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="./velemeny.css">
+    <title>BaZsi Borbély Szalon - Vélemény </title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm sticky-top">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">BaZsi Borbély Szalon</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Nyitás/csukás">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#velemenyek">Vélemények</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#valami">...</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Kezdőlap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../adminoldal/admin.html">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../foglalas/index.html">Foglalás</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+     <div class="velemeny-doboz">
+        <form>
+        <div class="mb-3">
+            <label for="nev" class="form-label">Mi a neved?</label>
+            <input type="text" id="nev" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="csillag" class="form-label">
+                Hány csillaggal értékeled a weboldalunkat? (0-5)
+            </label>
+            <input type="number" id="csillag" class="form-control" min="0" max="5">
+        </div>
+
+        <div class="mb-3">
+            <label for="szoveg" class="form-label">
+                Mi a végső véleményed?
+            </label>
+            <textarea name="szoveg" id="szoveg" class="form-control"></textarea>
+        </div>
+        <div class="text-center">
+        <button type="submit" class="btn" id="gomb">
+            Küldés
+        </button>
+    </div>
+    </form>
+    </div>
+    <footer class="d-flex justify-content-between p-2">
+        <span>BaZsi Borbély Szalon ©</span>
+        <span>Készítette: Holcsek Zsombor, Uglik Barnabás</span>
+    </footer>
+</body>
+</html>

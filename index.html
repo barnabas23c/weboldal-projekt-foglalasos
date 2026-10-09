@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Vélemények</a>
+                        <a class="nav-link active" aria-current="page" href="#velemenyek">Vélemények</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#valami">...</a>
@@ -46,9 +46,106 @@
         </div>
     </nav>
     <main>
-        <!-- Carousel -->
+        <!-- <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://barberworld.hu/wp-content/uploads/2020/09/0_wyADGici3oFLpdnk-1.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://barberworld.hu/wp-content/uploads/2020/09/0_wyADGici3oFLpdnk-1.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://barberworld.hu/wp-content/uploads/2020/09/0_wyADGici3oFLpdnk-1.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
         <h1>Főoldal</h1>
-        <div id="velemenyek"></div>
+        <div class="container mt-5 text-center">
+
+    <h3 class="text-white mb-4">Vélemények</h3>
+
+    <div id="velemenyCarousel" class="carousel slide">
+        <div class="carousel-inner" id="velemenyek">
+
+            <div class="carousel-item active">
+                <div class="card mx-auto velemeny-kartya">
+                    <div class="card-body">
+                        <h5 class="card-title">Botond</h5>
+                        <p class="text-warning">★★★★☆</p>
+                        <p class="card-text">
+                            Gyorsan kitölthető a kérdőív, és könnyen érthető az eredmény.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card mx-auto velemeny-kartya">
+                    <div class="card-body">
+                        <h5 class="card-title">III. Albert király</h5>
+                        <p class="text-warning">★☆☆☆☆</p>
+                        <p class="card-text">
+                            Badarásg ez az egész, az én időmben nem voltak ilyenek.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card mx-auto velemeny-kartya">
+                    <div class="card-body">
+                        <h5 class="card-title">Elisabeth</h5>
+                        <p class="text-warning">★★★★★</p>
+                        <p class="card-text">
+                            Érdekes volt látni, hogy a mindennapi szokásiam milyen károsak.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card mx-auto velemeny-kartya">
+                    <div class="card-body">
+                        <h5 class="card-title">Noel</h5>
+                        <p class="text-warning">★★★★☆</p>
+                        <p class="card-text">
+                            Tetszik, hogy felhívjátok a környeztre a figyelmet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#velemenyCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#velemenyCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+
+    </div>
+    <div class="text-center">
+        <a href=""><button type="button" class="btn" id="velemenygomb">Írj véleményt!</button></a>
+    </div>
+
+</div>
     </main>
     <footer class="d-flex justify-content-between p-2">
         <span>BaZsi Borbély Szalon ©</span>

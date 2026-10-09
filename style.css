@@ -46,3 +46,20 @@ main {
 footer {
     background-color: var(--hatter-footer);
 }
+
+/* ----- VELEMENYEK ----- */
+.velemeny-kartya {
+    width: 60%;
+    min-height: 160px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+#velemenyCarousel {
+    padding-bottom: 45px;
+}
+
+#velemenygomb{
+ margin-bottom: 20px;
+ background-color: lightblue;
+}

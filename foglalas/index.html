@@ -38,22 +38,26 @@
     <main>
         <h1>Foglalás</h1>
         <div class="card">
-            <form class="card-body d-grid gap-3 align-items-center" style="grid-template-columns: max-content auto;">
+            <form id="form" action="#" class="card-body d-grid gap-3 align-items-center" style="grid-template-columns: max-content auto;">
                 <label for="nev" class="form-label m-0">Név:</label>
-                <input type="text" id="nev" placeholder="Vezetéknév Keresztnév" class="form-control">
+                <input type="text" id="nev" placeholder="Vezetéknév Keresztnév" class="form-control" autocomplete="name" required>
                 <label for="email" class="form-label m-0">Email:</label>
-                <input type="email" id="email" placeholder="email@szolgaltato.hu" class="form-control">
+                <input type="email" id="email" placeholder="email@szolgaltato.hu" class="form-control" autocomplete="email" required>
                 <label for="tel" class="form-label m-0">Telefonszám:</label>
-                <input type="tel" id="tel" placeholder="+36 00 000 0000" class="form-control">
+                <input type="tel" id="tel" placeholder="+36 00 000 0000" class="form-control" autocomplete="tel" required>
                 <label for="datum" class="form-label m-0">Dátum:</label>
-                <input type="date" id="datum" class="form-control">
+                <input type="date" id="datum" class="form-control" required>
                 <label for="fodrasz" class="form-label m-0">Fodrász:</label>
-                <select id="fodrasz" class="form-select">
-                    <option name="">-- Válassz fodrászt --</option>
+                <select id="fodrasz" class="form-select" required>
+                    <option name="" disabled selected>-- Válasszon fodrászt --</option>
                 </select>
                 <label for="szolgaltatas" class="form-label m-0">Szolgáltatás:</label>
-                <select id="szolgaltatas" class="form-select">
-                    <option name="">-- Válassz szolgáltatást --</option>
+                <select id="szolgaltatas" class="form-select" required>
+                    <option name="" disabled selected>-- Válasszon szolgáltatást --</option>
+                </select>
+                <label for="idopont">Időpont:</label>
+                <select id="idopont" class="form-select" required disabled>
+                    <option name="" disabled selected>-- Válasszon időpontot --</option>
                 </select>
                 <div style="grid-column: span 2;">
                     <p>
@@ -62,12 +66,11 @@
                         Végösszeg: <span id="vegosszeg">-</span>
                     </p>
                     <div class="d-flex justify-content-center">
-                        <input id="foglalas" type="button" class="btn btn-primary px-5 py-2" value="Foglalás">
+                        <input id="foglalas" type="submit" class="btn btn-primary px-5 py-2" value="Foglalás">
                     </div>
                 </div>
             </form>
         </div>
-        <div class="alert alert-danger my-2 px-3 py-3" role="alert" id="formerr" style="display: none;"></div>
     </main>
     <footer class="d-flex justify-content-between p-2">
         <span>BaZsi Borbély Szalon ©</span>

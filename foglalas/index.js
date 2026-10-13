@@ -48,10 +48,9 @@ function getidopontok()
     let ch = 9, cm = 0;
     while (true)
     {
-        idopontok.push({ h: ch, m: cm });
+        idopontok.push({ h: ch, m: cm, free: ch < 12 || ch > 13 });
         cm += 15;
         if (cm === 60) { ch++; cm = 0; }
-        if (ch === 12) ch++;
         if (ch === 17) break;
     }
     return idopontok;
@@ -71,28 +70,36 @@ function getIdotartamForFoglalas(foglalas)
     return szolgaltatasok[foglalas.szolgaltatas].ido;
 }
 
+// NOTE: Ennél roszabb megoldást nem is találhattam volna ki, de mivel működik
+//       és nincs energiám/időm újracsinálni: jó lesz.
 function idopontUjratoltes()
 {
     idopont.innerHTML = `<option name="" disabled selected>-- Válasszon időpontot --</option>`;
     let idopontok = getidopontok();
-    if (datum.value == "" || szolgaltatas.selectedIndex === 0)
+    if (datum.value == "" || szolgaltatas.selectedIndex === 0 || fodrasz.selectedIndex === 0)
     {
         idopont.disabled = true;
         idopont.selectedIndex = 0;
         return;
     }
     idopont.disabled = false;
-    let aznapifoglalasok = (localStorage.getItem("foglalasok") ?? []).filter(x => x.datum === datum.value);
+    let aznapifoglalasok = (localStorage.getItem("foglalasok") ?? []).filter(x => x.datum === datum.value && x.fodrasz === fodrasz.selectedIndex);
     aznapifoglalasok.forEach(x =>
-        idopontok = idopontok.filter(y =>
-            !getOccupiedIdopontok(x.idopont,
-                getIdotartamForFoglalas(x)
-            ).includes(y)
-        )
+        idopontok.map(y => { return { h: y.h, m: y.m,
+            free: getOccupiedIdopontok(x.idopont, getIdotartamForFoglalas(x)).includes(y) }
+        })
     )
-    // TODO: ki kell szűrni azokat az időpontokat amik belelőgnak következő foglalásokba vagy a nap végébe
+    let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido / 15;
+    idopontok = idopontok.slice().filter((v, idx) =>
+        idx <= idopontok.length - hossz && // nap vége
+        idopontok.slice(idx, idx + hossz).every(x => x.free)
+    );
     idopontok.forEach(x => idopont.innerHTML += `<option name="${`${x.h}:${`${x.m}`.padStart(2, '0')}`}">${`${x.h}:${`${x.m}`.padStart(2, '0')}`}</option>`)
 }
+
+datum.addEventListener('change', () => idopontUjratoltes());
+fodrasz.addEventListener('change', () => idopontUjratoltes());
+szolgaltatas.addEventListener('change', () => idopontUjratoltes());
 
 szolgaltatas.addEventListener("change", () => {
     const idx = szolgaltatas.selectedIndex;

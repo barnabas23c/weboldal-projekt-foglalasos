@@ -15,9 +15,11 @@ Zsombi:
 - Oldal alapstruktúra
 - Betűtípus
 - Foglaláskezelő (admin) oldal
+- Vélemény oldal
 
 Barni:
 - Navbar, footer HTML + CSS
 - TODO: foglalások naptár nézet
 - Foglalás oldal (űrlap)
+- Foglalás visszaigazoló rendszer
 

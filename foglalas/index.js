@@ -41,17 +41,27 @@ let szolgaltatasok = [];
     };
     xhr.send();
 })();
+let foglalhatok = [];
+(() => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data/foglalhatok.json");
+    xhr.onload = () => foglalhatok = JSON.parse(xhr.response);
+    xhr.send();
+})();
 
-function getidopontok()
+function getidopontok(datum)
 {
+    let dayofweek = (new Date(datum).getDay() - 1 % 7);
+    let data = foglalhatok[dayofweek];
+
     let idopontok = [];
-    let ch = 9, cm = 0;
+    let ch = data.kezdes, cm = 0;
     while (true)
     {
-        idopontok.push({ h: ch, m: cm, free: ch < 12 || ch > 13 });
+        idopontok.push({ h: ch, m: cm, free: ch < data.szunetKezdes || ch > data.szunetVege });
         cm += 15;
         if (cm === 60) { ch++; cm = 0; }
-        if (ch === 17) break;
+        if (ch === data.vege) break;
     }
     return idopontok;
 }
@@ -75,13 +85,13 @@ function getIdotartamForFoglalas(foglalas)
 function idopontUjratoltes()
 {
     idopont.innerHTML = `<option name="" disabled selected>-- Válasszon időpontot --</option>`;
-    let idopontok = getidopontok();
     if (datum.value == "" || szolgaltatas.selectedIndex === 0 || fodrasz.selectedIndex === 0)
-    {
-        idopont.disabled = true;
-        idopont.selectedIndex = 0;
-        return;
-    }
+        {
+            idopont.disabled = true;
+            idopont.selectedIndex = 0;
+            return;
+        }
+    let idopontok = getidopontok(datum.value);
     idopont.disabled = false;
     let aznapifoglalasok = (localStorage.getItem("foglalasok") ?? []).filter(x => x.datum === datum.value && x.fodrasz === fodrasz.selectedIndex);
     aznapifoglalasok.forEach(x =>

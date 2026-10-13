@@ -51,7 +51,7 @@ let foglalhatok = [];
 
 function getidopontok(datum)
 {
-    let dayofweek = (new Date(datum).getDay() - 1 % 7);
+    let dayofweek = ((new Date(datum).getDay() + 6) % 7);
     let data = foglalhatok[dayofweek];
 
     let idopontok = [];
@@ -100,7 +100,7 @@ function idopontUjratoltes()
         })
     )
     let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido / 15;
-    idopontok = idopontok.slice().filter((v, idx) =>
+    idopontok = idopontok.slice().filter((_, idx) =>
         idx <= idopontok.length - hossz && // nap vége
         idopontok.slice(idx, idx + hossz).every(x => x.free)
     );
@@ -133,6 +133,8 @@ foglalas.addEventListener("click", () => {
     else email.setCustomValidity("");
     if (!tel.value.match(/^\+? ?(\d ?){11}$/)) { tel.setCustomValidity("Helytelen telefonszám!"); return; }
     else tel.setCustomValidity("");
+    if (((new Date(datum.value).getDay() + 6) % 7) === 6) { datum.setCustomValidity("Vasárnap nem vagyunk nyitva!"); return; }
+    else datum.setCustomValidity("");
     if (fodrasz.selectedIndex == 0) { fodrasz.setCustomValidity("Nem válaszott fodrászt!"); return; }
     else fodrasz.setCustomValidity("");
     if (szolgaltatas.selectedIndex == 0) { szolgaltatas.setCustomValidity("Nem válaszott szolgáltatást!"); return; }

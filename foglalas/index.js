@@ -68,17 +68,14 @@ function getidopontok(datum)
 
 function getRelM(idopont) { return idopont.h * 60 + idopont.m; }
 
-function getOccupiedIdopontok(kezdes, idotartam)
+function getOccupiedIdopontok(datum, kezdes, idotartam)
 {
-    let idopontok = getidopontok();
+    let idopontok = getidopontok(datum);
     idopontok = idopontok.filter(x => getRelM(x) >= getRelM(kezdes) && getRelM(x) <= getRelM(kezdes) + idotartam);
     return idopontok;
 }
 
-function getIdotartamForFoglalas(foglalas)
-{
-    return szolgaltatasok[foglalas.szolgaltatas].ido;
-}
+function strToIdopont(str) { let i = str.split(":").map(Number); return { h: i[0], m: i[1] }; }
 
 // NOTE: Ennél roszabb megoldást nem is találhattam volna ki, de mivel működik
 //       és nincs energiám/időm újracsinálni: jó lesz.
@@ -93,12 +90,10 @@ function idopontUjratoltes()
         }
     let idopontok = getidopontok(datum.value);
     idopont.disabled = false;
-    let aznapifoglalasok = (localStorage.getItem("foglalasok") ?? []).filter(x => x.datum === datum.value && x.fodrasz === fodrasz.selectedIndex);
-    aznapifoglalasok.forEach(x =>
-        idopontok.map(y => { return { h: y.h, m: y.m,
-            free: getOccupiedIdopontok(x.idopont, getIdotartamForFoglalas(x)).includes(y) }
-        })
-    )
+    let aznapifoglalasok = JSON.parse(localStorage.getItem("foglalasok") ?? "[]").filter(x => x.datum === datum.value && x.fodrasz === fodrasz.selectedIndex - 1);
+    aznapifoglalasok.forEach(x => idopontok = idopontok.map(y => {
+        return { h: y.h, m: y.m, free: y.free && !getOccupiedIdopontok(datum.value, strToIdopont(x.idopont), szolgaltatasok[x.szolgaltatas].ido).some(z => z.h === y.h && z.m === y.m) }
+    }))
     let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido / 15;
     idopontok = idopontok.slice().filter((_, idx) =>
         idx <= idopontok.length - hossz && // nap vége
@@ -150,7 +145,7 @@ foglalas.addEventListener("click", () => {
         szolgaltatas: szolgaltatas.selectedIndex - 1,
         idopont: idopont.value
     });
-    console.log(foglalasok)
+    localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
 });
 
 form.addEventListener('submit', (e) => {

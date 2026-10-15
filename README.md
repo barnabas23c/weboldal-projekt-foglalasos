@@ -1,13 +1,8 @@
 # BaZsi Borbély Szalon Weboldala
 
 # Specifikáció
-- LocalStorage mentés/betöltés
 - Carousel
-- Szűrés/rendezés
 - Leírások
-- Oldal tetejére görgető gomb
-- Field validáció (regexek)
-- Foglalások nézetváltó
 
 # Feladatelosztás:
 Zsombi:
@@ -16,10 +11,15 @@ Zsombi:
 - Betűtípus
 - Foglaláskezelő (admin) oldal
 - Vélemény oldal
+- Foglalások nézetváltó
+- Szűrés/rendezés
 
 Barni:
-- Navbar, footer HTML + CSS
-- TODO: foglalások naptár nézet
+- Navbar & footer HTML + CSS
 - Foglalás oldal (űrlap)
+    - Időpontválasztó/szűrő rendszer
+    - Field validáció (regexek)
 - Foglalás visszaigazoló rendszer
+- Oldal tetejére görgető gomb
+- LocalStorage mentés/betöltés
 

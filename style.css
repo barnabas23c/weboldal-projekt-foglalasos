@@ -89,6 +89,7 @@ footer {
     color: black;
     opacity: 0;
     transition: opacity .25s;
+    background-color: white;
 }
 
 #scrollup.visible { opacity: 1; }

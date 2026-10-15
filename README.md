@@ -10,9 +10,9 @@ Zsombi:
 - Oldal alapstruktúra
 - Betűtípus
 - Foglaláskezelő (admin) oldal
+    - Nézetváltó
+    - Szűrés & rendezés
 - Vélemény oldal
-- Foglalások nézetváltó
-- Szűrés/rendezés
 
 Barni:
 - Navbar & footer HTML + CSS

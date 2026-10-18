@@ -37,6 +37,7 @@ let szolgaltatasok = [];
         for (let i = 0; i < data.length; i++)
             szolgaltatas.innerHTML += `<option data-ar=${data[i].ar}>${data[i].szolgaltatas} - ${data[i].ar} Ft (${data[i].ido} perc)</option>`;
         szolgaltatasok = data;
+        szolgaltatas.selectedIndex = Number(new URLSearchParams(window.location.search).get("szolgaltatas")) + 1;
     };
     xhr.send();
 })();
@@ -182,3 +183,4 @@ form.addEventListener('submit', (e) => {
     });
     localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
 });
+

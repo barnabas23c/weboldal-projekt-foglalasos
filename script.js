@@ -1,6 +1,6 @@
-let fodraszok=document.getElementById("fodraszok");
-let szolgaltatasok=document.getElementById("szolgaltatasok");
-
+let fodraszok=document.getElementById("fodraszok_inner");
+let szolgaltatasok=document.getElementById("szolgaltatasok_inner");
+let nyitvatartas=document.getElementById("nyitvatartas_inner");
 
 (() => {
     const xhr = new XMLHttpRequest();

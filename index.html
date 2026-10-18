@@ -23,7 +23,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#velemenyek">Vélemények</a>
+                        <a class="nav-link" href="#szolgaltatasok">Szolgáltatásaink</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#fodraszok">Borbélyaink</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nyitvatartas">Nyitvatartás</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#velemenyek">Vélemények</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -67,19 +76,19 @@
         </button>
     </div>
     <main>
-        <div>
+        <div id="szolgaltatasok">
             <h2 class="text-center mt-5 mb-3">Szolgáltatásaink</h2>
-            <div id="szolgaltatasok" class="d-flex flex-wrap justify-content-center gap-3"></div>
+            <div id="szolgaltatasok_inner" class="d-flex flex-wrap justify-content-center gap-3"></div>
         </div>
-        <div>
+        <div id="fodraszok">
             <h2 class="text-center mt-5 mb-3">Borbélyaink</h2>
-            <div id="fodraszok" class="d-flex flex-wrap justify-content-center gap-3"></div>
+            <div id="fodraszok_inner" class="d-flex flex-wrap justify-content-center gap-3"></div>
         </div>
-        <div class="container flex justify-content-center">
+        <div id="nyitvatartas" class="container flex justify-content-center">
             <h2 class="text-center mt-5 mb-3">Nyitvatartás</h2>
             <div class="card card-body">
                 <table>
-                    <tbody id="nyitvatartas">
+                    <tbody id="nyitvatartas_inner">
                         <tr>
                             <th>Nap</th>
                             <th>Nyitás</th>
@@ -91,10 +100,10 @@
                 </table>
             </div>
         </div>
-        <div class="container mt-5 text-center">
-            <h3 class="text-white mb-4">Vélemények</h3>
+        <div id="velemenyek" class="container mt-5 text-center">
+            <h2 class="text-center mt-5 mb-3">Vélemények</h2>
             <div id="velemenyCarousel" class="carousel slide pb-3">
-                <div class="carousel-inner" id="velemenyek">
+                <div class="carousel-inner" id="velemenyek_inner">
                     <div class="carousel-item active">
                         <div class="card mx-auto velemeny-kartya">
                             <div class="card-body">

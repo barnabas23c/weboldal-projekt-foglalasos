@@ -1,9 +1,5 @@
 # BaZsi Borbély Szalon Weboldala
 
-# Specifikáció
-- Carousel
-- Leírások
-
 # Feladatelosztás:
 Zsombi:
 - JSON Fájlok feltöltése
@@ -13,6 +9,9 @@ Zsombi:
     - Nézetváltó
     - Szűrés & rendezés
 - Vélemény oldal
+- Főoldal:
+    - Fodrászok betöltése
+    - Vélemények carousel
 
 Barni:
 - Navbar & footer HTML + CSS
@@ -22,4 +21,8 @@ Barni:
 - Foglalás visszaigazoló rendszer
 - Oldal tetejére görgető gomb
 - LocalStorage mentés/betöltés
+- Főoldal:
+    - Carousel
+    - Szolgáltatások betöltése
+    - Nyitvatartás betöltése
 

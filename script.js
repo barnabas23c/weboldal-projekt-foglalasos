@@ -74,4 +74,31 @@ const betolt=()=>{
     xhr.send();
 })();
 
+
+const velemenyekInner = document.getElementById("velemenyek_inner");
+
+let velemenyek = JSON.parse(localStorage.getItem("velemenyek") ?? "[]");
+
+velemenyek.forEach((adat) => {
+    let kartya = document.createElement("div");
+    kartya.className = "carousel-item";
+
+    let csillagok = "★".repeat(adat.csillag) + "☆".repeat(5 - adat.csillag);
+
+    kartya.innerHTML = `
+        <div class="card mx-auto velemeny-kartya">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="text-warning">${csillagok}</p>
+                <p class="card-text"></p>
+            </div>
+        </div>
+    `;
+
+    kartya.querySelector(".card-title").textContent = adat.nev;
+    kartya.querySelector(".card-text").textContent = adat.velemeny;
+
+    velemenyekInner.appendChild(kartya);
+});
+
 window.addEventListener("load",betolt);

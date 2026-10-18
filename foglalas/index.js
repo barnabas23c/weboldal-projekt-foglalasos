@@ -10,7 +10,6 @@ const ar = document.getElementById("ar");
 const afa = document.getElementById("afa");
 const vegosszeg = document.getElementById("vegosszeg");
 
-const foglalas = document.getElementById("foglalas");
 const form = document.getElementById("form");
 
 var today = new Date().toISOString().split('T')[0];
@@ -23,7 +22,7 @@ let fodraszok = [];
     xhr.onload = () => {
         const data = JSON.parse(xhr.response);
         for (let i = 0; i < data.length; i++)
-            fodrasz.innerHTML += `<option name="${i}">${data[i].neve}</option>`;
+            fodrasz.innerHTML += `<option>${data[i].neve}</option>`;
         fodraszok = data;
     };
     xhr.send();
@@ -36,7 +35,7 @@ let szolgaltatasok = [];
     xhr.onload = () => {
         const data = JSON.parse(xhr.response);
         for (let i = 0; i < data.length; i++)
-            szolgaltatas.innerHTML += `<option name="${i}" data-ar=${data[i].ar}>${data[i].szolgaltatas} - ${data[i].ar} Ft (${data[i].ido} perc)</option>`;
+            szolgaltatas.innerHTML += `<option data-ar=${data[i].ar}>${data[i].szolgaltatas} - ${data[i].ar} Ft (${data[i].ido} perc)</option>`;
         szolgaltatasok = data;
     };
     xhr.send();
@@ -121,18 +120,54 @@ szolgaltatas.addEventListener("change", () => {
     }
 });
 
-foglalas.addEventListener("click", () => {
-    if (!nev.value.match(/^[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| )([A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| ))?[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+$/)) { nev.setCustomValidity("Helytelen név formátum!"); return; }
+form.addEventListener('submit', (e) => {
+    if (!nev.value.match(/^[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| )([A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| ))?[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+$/))
+    {
+        nev.setCustomValidity("Helytelen név formátum!");
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
     else nev.setCustomValidity("");
-    if (!email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) { email.setCustomValidity("Heyltelen email cím formátum!"); return; }
+    if (!email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+    {
+        email.setCustomValidity("Heyltelen email cím formátum!");
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
     else email.setCustomValidity("");
-    if (!tel.value.match(/^\+? ?(\d ?){11}$/)) { tel.setCustomValidity("Helytelen telefonszám!"); return; }
+    if (!tel.value.match(/^\+? ?(\d ?){11}$/))
+    {
+        tel.setCustomValidity("Helytelen telefonszám!");
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
     else tel.setCustomValidity("");
-    if (((new Date(datum.value).getDay() + 6) % 7) === 6) { datum.setCustomValidity("Vasárnap nem vagyunk nyitva!"); return; }
+    if (((new Date(datum.value).getDay() + 6) % 7) === 6)
+    {
+        datum.setCustomValidity("Vasárnap nem vagyunk nyitva!");
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
     else datum.setCustomValidity("");
-    if (fodrasz.selectedIndex == 0) { fodrasz.setCustomValidity("Nem válaszott fodrászt!"); return; }
+    if (fodrasz.selectedIndex == 0)
+    {
+        fodrasz.setCustomValidity("Nem válaszott fodrászt!");
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
     else fodrasz.setCustomValidity("");
-    if (szolgaltatas.selectedIndex == 0) { szolgaltatas.setCustomValidity("Nem válaszott szolgáltatást!"); return; }
+    if (szolgaltatas.selectedIndex == 0)
+    {
+        szolgaltatas.setCustomValidity("Nem válaszott szolgáltatást!");
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
     else szolgaltatas.setCustomValidity("");
 
     let foglalasok = localStorage.getItem("foglalasok") ?? [];
@@ -146,10 +181,4 @@ foglalas.addEventListener("click", () => {
         idopont: idopont.value
     });
     localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
-});
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
 });

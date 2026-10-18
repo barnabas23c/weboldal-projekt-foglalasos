@@ -6,8 +6,10 @@ Zsombi:
 - Oldal alapstruktúra
 - Betűtípus
 - Foglaláskezelő (admin) oldal
+    - Oldalstruktúra
     - Nézetváltó
-    - Szűrés & rendezés
+    - Szűrés
+    - Törlés
 - Vélemény oldal
 - Főoldal:
     - Fodrászok betöltése
@@ -25,4 +27,6 @@ Barni:
     - Carousel
     - Szolgáltatások betöltése
     - Nyitvatartás betöltése
+- Foglaláskezelő (admin) oldal
+    - Rendezés
 

@@ -1,7 +1,9 @@
-let foglalasok = {};
-let fodraszok = {};
-let szolg = {};
+let foglalasok = [];
+let fodraszok = [];
+let szolg = [];
 
+let rendezes = document.getElementById("rendezes");
+let rendezesgomb = document.getElementById("rendezgomb");
 let kartyak = document.getElementById("kartyak");
 let tablazat = document.getElementById("tablazat");
 let tablegomb = document.getElementById("tablegomb");
@@ -21,6 +23,83 @@ const torles = (esemeny) => {
     }
 }
 
+const kartyamegjelenit = () =>
+{
+    if (foglalasok == [] || fodraszok == []) return;
+    megjelenites = 0;
+    tablazat.hidden = true;
+    kartyak.hidden = false;
+    tablegomb.className = "btn btn-outline-dark";
+    kartyagomb.className = "btn btn-dark";
+    const sorted = foglalasok.toSorted((a, b) =>
+    {
+        if (rendezes.selectedIndex === 0) return ('' + a.nev).localeCompare(b.nev);
+        if (rendezes.selectedIndex === 1) return
+        new Date(year=b.idopont.ev, monthIndex=b.idopont.honap, date=b.idopont.nap, hours=b.idopont.ora) -
+            new Date(year=a.idopont.ev, monthIndex=a.idopont.honap, date=a.idopont.nap, hours=a.idopont.ora);
+        if (rendezes.selectedIndex === 2) return ('' + a.fodrasz).localeCompare(b.fodrasz);
+        if (rendezes.selectedIndex === 3) return ('' + a.szolgaltatas).localeCompare(b.szolgaltatas);
+    });
+    kartyak.innerHTML = "";
+    for (const data of sorted) {
+        data.torolve = false;
+        let index = foglalasok.indexOf(data);
+        kartyak.innerHTML += `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                ${data.nev}
+                            </h5>
+
+                            <p>
+                                <b>Email:</b>
+                                ${data.email}
+                            </p>
+
+                            <p>
+                                <b>Telefon:</b>
+                                ${data.telefonszam}
+                            </p>
+
+                            <p>
+                                <b>Időpont:</b>
+                                ${data.idopont.ev}.${data.idopont.honap}.${data.idopont.nap}. ${data.idopont.ora}:00
+                            </p>
+
+                            <p>
+                                <b>Fodrász:</b>
+                                ${fodraszok[data.fodrasz].neve}
+                            </p>
+
+                            <p>
+                                <b>Szolgáltatás:</b>
+                                ${szolg[data.szolgaltatas].szolgaltatas}
+                            </p>
+
+                            <input
+                                type="button"
+                                value="Törlés"
+                                class="btn btn-danger"
+                                name="torles"
+                                data-index="${index}"
+                            >
+
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+
+    let torlesgombok = document.querySelectorAll('input[name="torles"]');
+
+    for (const gomb of torlesgombok) {
+        gomb.addEventListener("click", torles);
+    }
+
+}
+
 const betolt = () => {
     let fodraszszures = document.getElementById("fodraszszures");
     let szolgaltatasszures = document.getElementById("szolgaltatasszures");
@@ -28,7 +107,7 @@ const betolt = () => {
     xhr.open("GET", "/data/fodraszok.json");
     xhr.onload = () => {
         fodraszok = JSON.parse(xhr.response);
-
+        kartyamegjelenit();
         for (const ember of fodraszok) {
             fodraszszures.innerHTML += `
                 <option value="${ember.neve}">
@@ -60,69 +139,15 @@ const betolt = () => {
     xhr3.open("GET", "/data/foglalasok.json");
     xhr3.onload = () => {
         foglalasok = JSON.parse(xhr3.response);
-
-        for (const data of foglalasok) {
-            data.torolve = false;
-            let index = foglalasok.indexOf(data);
-            kartyak.innerHTML += `
-                <div class="col-md-6 col-lg-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-
-                            <h5 class="card-title">
-                                ${data.nev}
-                            </h5>
-
-                            <p>
-                                <b>Email:</b>
-                                ${data.email}
-                            </p>
-
-                            <p>
-                                <b>Telefon:</b>
-                                ${data.telefonszam}
-                            </p>
-
-                            <p>
-                                <b>Időpont:</b>
-                                ${data.idopont.ev}.${data.idopont.honap}.${data.idopont.nap}. ${data.idopont.ora}:00
-                            </p>
-
-                            <p>
-                                <b>Fodrász:</b>
-                                ${fodraszok[data.fodrasz].nev}
-                            </p>
-
-                            <p>
-                                <b>Szolgáltatás:</b>
-                                ${szolg[data.szolgaltatas].szolgaltatas}
-                            </p>
-
-                            <input
-                                type="button"
-                                value="Törlés"
-                                class="btn btn-danger"
-                                name="torles"
-                                data-index="${index}"
-                            >
-
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        let torlesgombok = document.querySelectorAll('input[name="torles"]');
-
-        for (const gomb of torlesgombok) {
-            gomb.addEventListener("click", torles);
-        }
+        kartyamegjelenit();
     };
 
     xhr3.send();
 }
 
+let megjelenites = 0;
 const tablazatmegjelenit = () => {
+    megjelenites = 1;
     kartyagomb.className = "btn btn-outline-dark";
     tablegomb.className = "btn btn-dark";
     kartyak.hidden = true;
@@ -131,18 +156,27 @@ const tablazatmegjelenit = () => {
     tablazattorzs.innerHTML = `
         <thead>
             <tr>
-                <td>Név</td>
-                <td>Email</td>
-                <td>Telefonszám</td>
-                <td>Időpont</td>
-                <td>Fodrász</td>
-                <td>Szolgáltatás</td>
-                <td>Törlés</td>
+                <th>Név</th>
+                <th>Email</th>
+                <th>Telefonszám</th>
+                <th>Időpont</th>
+                <th>Fodrász</th>
+                <th>Szolgáltatás</th>
+                <th>Törlés</th>
             </tr>
         </thead>
     `;
 
-    for (const data of foglalasok) {
+    const sorted = foglalasok.toSorted((a, b) =>
+        {
+            if (rendezes.selectedIndex === 0) return ('' + a.nev).localeCompare(b.nev);
+            if (rendezes.selectedIndex === 1) return
+            new Date(year=b.idopont.ev, monthIndex=b.idopont.honap, date=b.idopont.nap, hours=b.idopont.ora) -
+                new Date(year=a.idopont.ev, monthIndex=a.idopont.honap, date=a.idopont.nap, hours=a.idopont.ora);
+            if (rendezes.selectedIndex === 2) return ('' + a.fodrasz).localeCompare(b.fodrasz);
+            if (rendezes.selectedIndex === 3) return ('' + a.szolgaltatas).localeCompare(b.szolgaltatas);
+        });
+    for (const data of sorted) {
         if (data.torolve == true) {
             continue;
         }
@@ -179,13 +213,7 @@ const tablazatmegjelenit = () => {
     }
 }
 
-const kartyamegjelenit = () => {
-    tablazat.hidden = true;
-    kartyak.hidden = false;
-    tablegomb.className = "btn btn-outline-dark";
-    kartyagomb.className = "btn btn-dark";
-}
-
 window.addEventListener("load", betolt);
 tablegomb.addEventListener("click", tablazatmegjelenit);
 kartyagomb.addEventListener("click", kartyamegjelenit);
+rendezesgomb.addEventListener("click", () => megjelenites === 0 ? kartyamegjelenit() : tablazatmegjelenit())

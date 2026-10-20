@@ -17,7 +17,7 @@ let nyitvatartas=document.getElementById("nyitvatartas_inner");
                             <br>
                             <b>Időtartam:</b> ${data[i].ido} perc
                         </p>
-                        <a href="/foglalas/?szolgaltatas=${i}" class="btn btn-primary">Foglalás most</a>
+                        <a href="/foglalas/?szolgaltatas=${i}" class="btn" id="szolgGomb">Foglalás most</a>
                     </div>
                 </div>
             `;

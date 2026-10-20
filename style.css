@@ -20,6 +20,8 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(135deg,#ffffff, #e3f2f7, #b0d9e6);
+    background-attachment: fixed;
 }
 
 
@@ -38,7 +40,6 @@ body {
 
 /* ----- MAIN ----- */
 main {
-    background-color: var(--hatter-main);
     padding: 12px;
     flex-grow: 1;
 }
@@ -46,6 +47,12 @@ main {
 /* ----- NAVBAR ----- */
 footer {
     background-color: var(--hatter-footer);
+}
+
+.card{
+    background: linear-gradient(270deg,#ffffff, #e3f2f7, #b0d9e6);
+    border: 1px solid black;
+
 }
 
 /* ----- CAROUSEL ----- */
@@ -62,7 +69,7 @@ footer {
     width: 60%;
     min-height: 160px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.85);
+    background: linear-gradient(270deg,#ffffff, #e3f2f7, #b0d9e6);
 }
 
 #velemenyCarousel {
@@ -80,6 +87,7 @@ footer {
 #velemenyekgomb{
  margin-bottom: 20px;
  background-color: lightblue;
+ border: 1px solid black;
 }
 
 #kepek{
@@ -88,6 +96,7 @@ footer {
     height: 100;
     width: 100px;
     margin: auto;
+    float: right;
 }
 
 /* ----- FELGÖRGETŐ GOMB ----- */
@@ -111,3 +120,29 @@ footer {
 
 #scrollup.visible { opacity: 1; }
 
+#szolgGomb{
+    background-color: lightblue;
+    border: 1px solid black;
+}
+
+#szolgGomb:hover{
+    background-color:white ;
+}
+
+#velemenyekgomb:hover{
+    background-color:white ;
+
+}
+
+#aboutus{
+    font-size: 20px;
+    border-bottom:3px solid black ;
+    
+}
+
+.carousel-item img{
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+}

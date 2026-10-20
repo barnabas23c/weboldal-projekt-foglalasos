@@ -5,3 +5,12 @@ main {
     align-items: center;
     justify-content: center;
 }
+
+.btn{
+    background-color: lightblue;
+    border: 1px solid black;
+}
+
+.btn:hover{
+    background-color: white;
+}

@@ -125,57 +125,66 @@ szolgaltatas.addEventListener("change", () => {
     }
 });
 
+nev.addEventListener('change', () => nev.setCustomValidity(""));
+email.addEventListener('change', () => email.setCustomValidity(""));
+tel.addEventListener('change', () => tel.setCustomValidity(""));
+datum.addEventListener('change', () => datum.setCustomValidity(""));
+fodrasz.addEventListener('change', () => fodrasz.setCustomValidity(""));
+szolgaltatas.addEventListener('change', () => szolgaltatas.setCustomValidity(""));
+idopont.addEventListener('change', () => idopont.setCustomValidity(""));
+
 form.addEventListener('submit', (e) => {
-    if (!nev.value.match(/^[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| )([A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| ))?[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+$/))
+    let err = false;
+    nev.setCustomValidity("");
+    email.setCustomValidity("");
+    tel.setCustomValidity("");
+    datum.setCustomValidity("");
+    fodrasz.setCustomValidity("");    
+    szolgaltatas.setCustomValidity("");
+    if (!/^[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| )([A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| ))?[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+$/.test(nev.value))
     {
         nev.setCustomValidity("Helytelen név formátum!");
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        err = true;
     }
-    else nev.setCustomValidity("");
-    if (!email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+    if (!/^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value))
     {
         email.setCustomValidity("Heyltelen email cím formátum!");
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        err = true;
     }
-    else email.setCustomValidity("");
-    if (!tel.value.match(/^\+? ?(\d ?){11}$/))
+    if (!/^\+? ?(\d ?){11}$/.test(tel.value))
     {
         tel.setCustomValidity("Helytelen telefonszám!");
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        err = true;
     }
-    else tel.setCustomValidity("");
     if (((new Date(datum.value).getDay() + 6) % 7) === 6)
     {
         datum.setCustomValidity("Vasárnap nem vagyunk nyitva!");
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        err = true;
     }
-    else datum.setCustomValidity("");
     if (fodrasz.selectedIndex == 0)
     {
         fodrasz.setCustomValidity("Nem válaszott fodrászt!");
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        err = true;
     }
-    else fodrasz.setCustomValidity("");
     if (szolgaltatas.selectedIndex == 0)
     {
         szolgaltatas.setCustomValidity("Nem válaszott szolgáltatást!");
+        err = true;
+    }
+    if (idopont.selectedIndex == 0)
+    {
+        idopont.setCustomValidity("Nem válaszott időpontot!");
+        err = true;
+    }
+
+    if (err)
+    {
         e.preventDefault();
         e.stopPropagation();
         return false;
     }
-    else szolgaltatas.setCustomValidity("");
 
-    let foglalasok = localStorage.getItem("foglalasok") ?? [];
+    let foglalasok = JSON.parse(localStorage.getItem("foglalasok")) ?? [];
     foglalasok.push({
         nev: nev.value,
         email: email.value,

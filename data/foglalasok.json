@@ -7,7 +7,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 18,
-            "ora": 15
+            "ora": 15,
+            "perc": 0
         },
         "fodrasz": 0,
         "szolgaltatas": 0
@@ -20,7 +21,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 18,
-            "ora": 10
+            "ora": 10,
+            "perc": 0
         },
         "fodrasz": 1,
         "szolgaltatas": 1
@@ -33,7 +35,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 18,
-            "ora": 13
+            "ora": 13,
+            "perc": 0
         },
         "fodrasz": 2,
         "szolgaltatas": 2
@@ -46,7 +49,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 19,
-            "ora": 9
+            "ora": 9,
+            "perc": 0
         },
         "fodrasz": 3,
         "szolgaltatas": 0
@@ -59,7 +63,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 19,
-            "ora": 14
+            "ora": 14,
+            "perc": 0
         },
         "fodrasz": 4,
         "szolgaltatas": 3
@@ -72,7 +77,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 19,
-            "ora": 16
+            "ora": 16,
+            "perc": 0
         },
         "fodrasz": 5,
         "szolgaltatas": 1
@@ -85,7 +91,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 20,
-            "ora": 10
+            "ora": 10,
+            "perc": 0
         },
         "fodrasz": 0,
         "szolgaltatas": 2
@@ -98,7 +105,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 20,
-            "ora": 12
+            "ora": 12,
+            "perc": 0
         },
         "fodrasz": 1,
         "szolgaltatas": 0
@@ -111,7 +119,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 20,
-            "ora": 15
+            "ora": 15,
+            "perc": 0
         },
         "fodrasz": 2,
         "szolgaltatas": 3
@@ -124,7 +133,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 21,
-            "ora": 9
+            "ora": 9,
+            "perc": 0
         },
         "fodrasz": 3,
         "szolgaltatas": 1
@@ -137,7 +147,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 21,
-            "ora": 11
+            "ora": 11,
+            "perc": 0
         },
         "fodrasz": 4,
         "szolgaltatas": 2
@@ -150,7 +161,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 21,
-            "ora": 16
+            "ora": 16,
+            "perc": 0
         },
         "fodrasz": 5,
         "szolgaltatas": 0
@@ -163,7 +175,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 22,
-            "ora": 10
+            "ora": 10,
+            "perc": 0
         },
         "fodrasz": 0,
         "szolgaltatas": 3
@@ -176,7 +189,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 22,
-            "ora": 13
+            "ora": 13,
+            "perc": 0
         },
         "fodrasz": 3,
         "szolgaltatas": 2
@@ -189,7 +203,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 22,
-            "ora": 17
+            "ora": 17,
+            "perc": 0
         },
         "fodrasz": 5,
         "szolgaltatas": 1
@@ -202,7 +217,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 23,
-            "ora": 11
+            "ora": 11,
+            "perc": 0
         },
         "fodrasz": 2,
         "szolgaltatas": 0
@@ -215,7 +231,8 @@
             "ev": 2026,
             "honap": 11,
             "nap": 23,
-            "ora": 15
+            "ora": 15,
+            "perc": 0
         },
         "fodrasz": 4,
         "szolgaltatas": 1

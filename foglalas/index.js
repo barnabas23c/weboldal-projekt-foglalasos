@@ -49,9 +49,9 @@ let foglalhatok = [];
     xhr.send();
 })();
 
-function getidopontok(datum)
+function getidopontok(idp)
 {
-    let dayofweek = ((new Date(datum).getDay() + 6) % 7);
+    let dayofweek = ((new Date(idp).getDay() + 6) % 7);
     let data = foglalhatok[dayofweek];
 
     let idopontok = [];
@@ -90,9 +90,13 @@ function idopontUjratoltes()
         }
     let idopontok = getidopontok(datum.value);
     idopont.disabled = false;
-    let aznapifoglalasok = JSON.parse(localStorage.getItem("foglalasok") ?? "[]").filter(x => x.datum === datum.value && x.fodrasz === fodrasz.selectedIndex - 1);
+    let aznapifoglalasok = JSON.parse(localStorage.getItem("foglalasok") ?? "[]").filter(x =>
+        x.idopont.ev === Number(datum.value.split("-")[0]) &&
+        x.idopont.honap === Number(datum.value.split("-")[1]) &&
+        x.idopont.nap === Number(datum.value.split("-")[2]) &&
+        x.fodrasz === fodrasz.selectedIndex - 1);
     aznapifoglalasok.forEach(x => idopontok = idopontok.map(y => {
-        return { h: y.h, m: y.m, free: y.free && !getOccupiedIdopontok(datum.value, strToIdopont(x.idopont), szolgaltatasok[x.szolgaltatas].ido).some(z => z.h === y.h && z.m === y.m) }
+        return { h: y.h, m: y.m, free: y.free && !getOccupiedIdopontok(datum.value, strToIdopont(`${x.idopont.ora}:${x.idopont.perc}`), szolgaltatasok[x.szolgaltatas].ido).some(z => z.h === y.h && z.m === y.m) }
     }))
     let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido / 15;
     idopontok = idopontok.slice().filter((_, idx) =>
@@ -175,11 +179,16 @@ form.addEventListener('submit', (e) => {
     foglalasok.push({
         nev: nev.value,
         email: email.value,
-        tel: tel.value,
-        datum: datum.value,
+        telefonszam: tel.value,
         fodrasz: fodrasz.selectedIndex - 1,
         szolgaltatas: szolgaltatas.selectedIndex - 1,
-        idopont: idopont.value
+        idopont: {
+            ev: Number(datum.value.split("-")[0]),
+            honap: Number(datum.value.split("-")[1]),
+            nap: Number(datum.value.split("-")[2]),
+            ora: Number(idopont.value.split(":")[0]),
+            perc: Number(idopont.value.split(":")[0])
+        }
     });
     localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
 });

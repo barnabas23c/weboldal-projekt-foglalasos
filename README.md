@@ -1,8 +1,8 @@
 # BaZsi Borbély Szalon Weboldala
 
-# Feladatelosztás:
+# Specifikáció:
 Zsombi:
-- JSON Fájlok feltöltése
+- JSON Fájlok feltöltése adatokkal
 - Oldal alapstruktúra
 - Betűtípus
 - Foglaláskezelő (admin) oldal
@@ -20,8 +20,8 @@ Barni:
 - Foglalás oldal (űrlap)
     - Időpontválasztó/szűrő rendszer
     - Field validáció (regexek)
-- Foglalás visszaigazoló rendszer
-- Oldal tetejére görgető gomb
+- Foglalás visszaigazoló oldal
+- Oldal tetejére görgető gomb(ok)
 - LocalStorage mentés/betöltés
 - Főoldal:
     - Carousel

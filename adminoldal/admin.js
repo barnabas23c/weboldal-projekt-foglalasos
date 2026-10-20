@@ -18,24 +18,17 @@ let megjelenites = 0;
 
 const torles = (esemeny) => {
     let index = esemeny.target.dataset.index;
-    if (!foglalasok[index].custom)
-    {   
-        foglalasok[index].torolve = true;
-        szures();
+    foglalasok[index].torolve = true;
+    let sajatFoglalasok = foglalasok.filter(x => x.custom);
+    localStorage.setItem("foglalasok", JSON.stringify(sajatFoglalasok));
+    let toroltek = JSON.parse(localStorage.getItem("toroltek") ?? "[]");
+    if (!foglalasok[index].custom) {
+        toroltek.push(Number(index));
     }
-    else
-    {
-        let y = foglalasok[index].idopont;
-        let newfolalasok = JSON.parse(localStorage.getItem("foglalasok") ?? "[]").filter(x => !(
-            x.idopont.ev === y.ev && x.idopont.honap === y.honap && x.idopont.nap === y.nap
-        ));
-        localStorage.setItem("foglalasok", JSON.stringify(newfolalasok));
-        foglalasok = foglalasok.filter(x => !(
-            x.idopont.ev === y.ev && x.idopont.honap === y.honap && x.idopont.nap === y.nap
-        ));
-        szures();
-    }
-}
+    localStorage.setItem("toroltek", JSON.stringify(toroltek));
+
+    szures();
+};
 
 
 const szures = () => {
@@ -266,11 +259,17 @@ const betolt = () => {
     const xhr3 = new XMLHttpRequest();
     xhr3.open("GET", "/data/foglalasok.json");
 
-    xhr3.onload = () => {
-        foglalasok = foglalasok.concat(JSON.parse(xhr3.response));
+  xhr3.onload = () => {
+    foglalasok = foglalasok.concat(JSON.parse(xhr3.response));
+    let toroltek = JSON.parse(localStorage.getItem("toroltek") ?? "[]");
+    toroltek.forEach(index => {
+        if (foglalasok[index]) {
+            foglalasok[index].torolve = true;
+        }
+    });
 
-        kesz();
-    };
+    kesz();
+};
 
     xhr3.send();
 }

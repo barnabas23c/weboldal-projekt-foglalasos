@@ -15,6 +15,18 @@ const form = document.getElementById("form");
 var today = new Date().toISOString().split('T')[0];
 datum.setAttribute("min", today);
 
+let foglalasokjson = [];
+
+(() => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/data/foglalasok.json");
+    xhr.onload = () => {
+        foglalasokjson = JSON.parse(xhr.response);
+        idopontUjratoltes();
+    };
+    xhr.send();
+})();
+
 let fodraszok = [];
 (() => {
     const xhr = new XMLHttpRequest();
@@ -37,7 +49,7 @@ let szolgaltatasok = [];
         for (let i = 0; i < data.length; i++)
             szolgaltatas.innerHTML += `<option data-ar=${data[i].ar}>${data[i].szolgaltatas} - ${data[i].ar} Ft (${data[i].ido} perc)</option>`;
         szolgaltatasok = data;
-        szolgaltatas.selectedIndex = Number(new URLSearchParams(window.location.search).get("szolgaltatas")) + 1;
+        // szolgaltatas.selectedIndex = Number(new URLSearchParams(window.location.search).get("szolgaltatas")) + 1;
     };
     xhr.send();
 })();
@@ -68,46 +80,70 @@ function getidopontok(idp)
 
 function getRelM(idopont) { return idopont.h * 60 + idopont.m; }
 
-function getOccupiedIdopontok(datum, kezdes, idotartam)
-{
-    let idopontok = getidopontok(datum);
-    idopontok = idopontok.filter(x => getRelM(x) >= getRelM(kezdes) && getRelM(x) <= getRelM(kezdes) + idotartam);
-    return idopontok;
-}
+// function getOccupiedIdopontok(datum, kezdes, idotartam)
+// {
+//     let idopontok = getidopontok(datum);
+//     idopontok = idopontok.filter(x => getRelM(x) >= getRelM(kezdes) && getRelM(x) < getRelM(kezdes) + idotartam);
+//     return idopontok;
+// }
 
-function strToIdopont(str) { let i = str.split(":").map(Number); return { h: i[0], m: i[1] }; }
+// function strToIdopont(str) { let i = str.split(":").map(Number); return { h: i[0], m: i[1] }; }
 
 // NOTE: Ennél roszabb megoldást nem is találhattam volna ki, de mivel működik
 //       és nincs energiám/időm újracsinálni: jó lesz.
 function idopontUjratoltes()
 {
-    idopont.innerHTML = `<option name="" disabled selected>-- Válasszon időpontot --</option>`;
+    idopont.innerHTML = `<option disabled selected>-- Válasszon időpontot --</option>`;
+
     if (datum.value == "" || szolgaltatas.selectedIndex === 0 || fodrasz.selectedIndex === 0)
-        {
-            idopont.disabled = true;
-            idopont.selectedIndex = 0;
-            return;
-        }
+    {
+        idopont.disabled = true;
+        idopont.selectedIndex = 0;
+        return;
+    }
+
     let idopontok = getidopontok(datum.value);
     idopont.disabled = false;
-    let aznapifoglalasok = JSON.parse(localStorage.getItem("foglalasok") ?? "[]").filter(x =>
+
+    let foglalasok = foglalasokjson.concat(
+        JSON.parse(localStorage.getItem("foglalasokjson") ?? "[]")
+    );
+
+    let aznapifoglalasok = foglalasok.filter(x =>
         x.idopont.ev === Number(datum.value.split("-")[0]) &&
         x.idopont.honap === Number(datum.value.split("-")[1]) &&
         x.idopont.nap === Number(datum.value.split("-")[2]) &&
-        x.fodrasz === fodrasz.selectedIndex - 1);
-    aznapifoglalasok.forEach(x => idopontok = idopontok.map(y => {
-        return { h: y.h, m: y.m, free: y.free && !getOccupiedIdopontok(datum.value, strToIdopont(`${x.idopont.ora}:${x.idopont.perc}`), szolgaltatasok[x.szolgaltatas].ido).some(z => z.h === y.h && z.m === y.m) }
-    }))
-    let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido / 15;
-    idopontok = idopontok.slice().filter((_, idx) =>
-        idx <= idopontok.length - hossz && // nap vége
-        idopontok.slice(idx, idx + hossz).every(x => x.free)
+        x.fodrasz === fodrasz.selectedIndex - 1 &&
+        x.torolve !== true
     );
-    idopontok.forEach(x => idopont.innerHTML += `<option name="${`${x.h}:${`${x.m}`.padStart(2, '0')}`}">${`${x.h}:${`${x.m}`.padStart(2, '0')}`}</option>`)
+
+    let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido;
+
+    idopontok = idopontok.filter((x, index) => {
+        if (index + hossz / 15 > idopontok.length) return false;
+
+        if (!idopontok.slice(index, index + hossz / 15).every(y => y.free)) return false;
+
+        let kezdes = getRelM(x);
+        let vege = kezdes + hossz;
+
+        return !aznapifoglalasok.some(y => {
+            let foglaltKezdes = y.idopont.ora * 60 + y.idopont.perc;
+            let foglaltVege = foglaltKezdes + szolgaltatasok[y.szolgaltatas].ido;
+
+            return kezdes < foglaltVege && vege > foglaltKezdes;
+        });
+    });
+
+    idopont.disabled = idopontok.length === 0;
+
+    idopontok.forEach(x =>
+        idopont.innerHTML += `<option>${x.h}:${String(x.m).padStart(2, "0")}</option>`
+    );
 }
 
 datum.addEventListener('change', () => idopontUjratoltes());
-fodrasz.addEventListener('change', () => idopontUjratoltes());
+fodrasz.addEventListener('change', () => szolgaltatasSzures());
 szolgaltatas.addEventListener('change', () => idopontUjratoltes());
 
 szolgaltatas.addEventListener("change", () => {
@@ -196,9 +232,29 @@ form.addEventListener('submit', (e) => {
             honap: Number(datum.value.split("-")[1]),
             nap: Number(datum.value.split("-")[2]),
             ora: Number(idopont.value.split(":")[0]),
-            perc: Number(idopont.value.split(":")[0])
+            perc: Number(idopont.value.split(":")[1])
         }
     });
     localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
 });
 
+function szolgaltatasSzures() {
+    ar.innerText = "-";
+    afa.innerText = "-";
+    vegosszeg.innerText = "-";
+    szolgaltatas.selectedIndex = 0;
+    szolgaltatas.disabled = fodrasz.selectedIndex === 0;
+    if (fodrasz.selectedIndex === 0) {
+        idopontUjratoltes();
+        return;
+    }
+
+    for (let i = 0; i < szolgaltatasok.length; i++) {
+        let elerheto = fodraszok[fodrasz.selectedIndex - 1].szolgaltatasok.includes(i);
+
+        szolgaltatas.options[i + 1].hidden = !elerheto;
+        szolgaltatas.options[i + 1].disabled = !elerheto;
+    }
+
+    idopontUjratoltes();
+}

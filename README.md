@@ -16,8 +16,8 @@ Zsombi:
     - Vélemények carousel
     - Stílúsozás
 - Foglalás oldal (űrlap)
-    -Foglalt időpontok kiszűrése
-    -Végzett szolgáltatások betöltése a fodrászoknál
+    - Foglalt időpontok kiszűrése
+    - Végzett szolgáltatások betöltése a fodrászoknál
 
 Barni:
 - Navbar & footer HTML + CSS

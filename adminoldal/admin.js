@@ -16,15 +16,22 @@ let kartyagomb = document.getElementById("kartyagomb");
 let megjelenites = 0;
 
 
+
 const torles = (esemeny) => {
-    let index = esemeny.target.dataset.index;
+    let index = Number(esemeny.target.dataset.index);
     foglalasok[index].torolve = true;
     let sajatFoglalasok = foglalasok.filter(x => x.custom);
     localStorage.setItem("foglalasok", JSON.stringify(sajatFoglalasok));
     let toroltek = JSON.parse(localStorage.getItem("toroltek") ?? "[]");
+
     if (!foglalasok[index].custom) {
-        toroltek.push(Number(index));
+        let jsonIndex = index - sajatFoglalasok.length;
+
+        if (!toroltek.includes(jsonIndex)) {
+            toroltek.push(jsonIndex);
+        }
     }
+
     localStorage.setItem("toroltek", JSON.stringify(toroltek));
 
     szures();
@@ -55,7 +62,7 @@ const kartyamegjelenit = () => {
     tablegomb.className = "btn btn-outline-dark";
     kartyagomb.className = "btn btn-dark";
 
-    const sorted = szurtfoglalasok.toSorted((a, b) => {
+    const rendezett = szurtfoglalasok.toSorted((a, b) => {
         if (rendezes.value == "nev")
             return a.nev.localeCompare(b.nev);
 
@@ -74,7 +81,7 @@ const kartyamegjelenit = () => {
 
     kartyak.innerHTML = "";
 
-    for (const data of sorted) {
+    for (const data of rendezett) {
         let index = foglalasok.indexOf(data);
 
         kartyak.innerHTML += `
@@ -98,7 +105,7 @@ const kartyamegjelenit = () => {
 
                         <p>
                             <b>Időpont:</b>
-                            ${data.idopont.ev}.${data.idopont.honap}.${data.idopont.nap}. ${data.idopont.ora}:00
+                            ${data.idopont.ora}:${data.idopont.perc < 10 ? "0" + data.idopont.perc : data.idopont.perc}
                         </p>
 
                         <p>
@@ -158,24 +165,32 @@ const tablazatmegjelenit = () => {
         </thead>
     `;
 
-    const sorted = szurtfoglalasok.toSorted((a, b) => {
-        if (rendezes.value === "nev")
-            return a.nev.localeCompare(b.nev);
+    
+const rendezett = szurtfoglalasok.toSorted((a, b) => {
+    if (rendezes.value == "nev") {
+        return a.nev.localeCompare(b.nev);
+    }
 
-        if (rendezes.value == "datum")
-            return new Date(a.idopont.ev, a.idopont.honap - 1, a.idopont.nap, a.idopont.ora) -
-                   new Date(b.idopont.ev, b.idopont.honap - 1, b.idopont.nap, b.idopont.ora);
+    if (rendezes.value == "datum") {
+        let datumA = a.idopont;
+        let datumB = b.idopont;
+        let idoA = new Date(datumA.ev, datumA.honap - 1, datumA.nap, datumA.ora, datumA.perc);
+        let idoB = new Date(datumB.ev, datumB.honap - 1, datumB.nap, datumB.ora, datumB.perc);
+        return idoA - idoB;
+    }
 
-        if (rendezes.value == "fodrasz")
-            return fodraszok[a.fodrasz].neve.localeCompare(fodraszok[b.fodrasz].neve);
+    if (rendezes.value == "fodrasz") {
+        return fodraszok[a.fodrasz].neve.localeCompare(fodraszok[b.fodrasz].neve);
+    }
 
-        if (rendezes.value == "szolgaltatas")
-            return szolg[a.szolgaltatas].szolgaltatas.localeCompare(szolg[b.szolgaltatas].szolgaltatas);
+    if (rendezes.value == "szolgaltatas") {
+        return szolg[a.szolgaltatas].szolgaltatas.localeCompare(szolg[b.szolgaltatas].szolgaltatas);
+    }
+    return 0;
+});
 
-        return 0;
-    });
 
-    for (const data of sorted) {
+    for (const data of rendezett) {
         let index = foglalasok.indexOf(data);
 
         tablazattorzs.innerHTML += `
@@ -184,7 +199,7 @@ const tablazatmegjelenit = () => {
                 <td>${data.email}</td>
                 <td>${data.telefonszam}</td>
                 <td>
-                    ${data.idopont.ev}.${data.idopont.honap}.${data.idopont.nap}. ${data.idopont.ora}:00
+                    ${data.idopont.ora}:${data.idopont.perc < 10 ? "0" + data.idopont.perc : data.idopont.perc}
                 </td>
                 <td>${fodraszok[data.fodrasz].neve}</td>
                 <td>${szolg[data.szolgaltatas].szolgaltatas}</td>
@@ -256,25 +271,24 @@ const betolt = () => {
 
     xhr2.send();
 
+    
     const xhr3 = new XMLHttpRequest();
     xhr3.open("GET", "/data/foglalasok.json");
-
-  xhr3.onload = () => {
-    foglalasok = foglalasok.concat(JSON.parse(xhr3.response));
+    xhr3.onload = () => {
+    let jsonFoglalasok = JSON.parse(xhr3.response);
     let toroltek = JSON.parse(localStorage.getItem("toroltek") ?? "[]");
     toroltek.forEach(index => {
-        if (foglalasok[index]) {
-            foglalasok[index].torolve = true;
+        if (jsonFoglalasok[index]) {
+            jsonFoglalasok[index].torolve = true;
         }
     });
-
+    foglalasok = foglalasok.concat(jsonFoglalasok);
     kesz();
 };
 
+
     xhr3.send();
 }
-
-
 
 window.addEventListener("load", betolt);
 tablegomb.addEventListener("click", tablazatmegjelenit);

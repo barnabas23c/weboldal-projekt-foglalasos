@@ -105,9 +105,16 @@ function idopontUjratoltes()
     let idopontok = getidopontok(datum.value);
     idopont.disabled = false;
 
-    let foglalasok = foglalasokjson.concat(
-        JSON.parse(localStorage.getItem("foglalasokjson") ?? "[]")
+    
+    let toroltek = JSON.parse(localStorage.getItem("toroltek") ?? "[]");
+    let aktivFoglalasok = foglalasokjson.filter(
+    (x, index) => !toroltek.includes(index)
     );
+
+    let ujFoglalasok = JSON.parse(
+    localStorage.getItem("foglalasok") ?? "[]").filter(x => x.torolve !== true);
+    let foglalasok = aktivFoglalasok.concat(ujFoglalasok);
+
 
     let aznapifoglalasok = foglalasok.filter(x =>
         x.idopont.ev === Number(datum.value.split("-")[0]) &&
@@ -227,6 +234,7 @@ form.addEventListener('submit', (e) => {
         telefonszam: tel.value,
         fodrasz: fodrasz.selectedIndex - 1,
         szolgaltatas: szolgaltatas.selectedIndex - 1,
+        custom: true,
         idopont: {
             ev: Number(datum.value.split("-")[0]),
             honap: Number(datum.value.split("-")[1]),

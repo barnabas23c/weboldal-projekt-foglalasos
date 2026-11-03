@@ -118,7 +118,7 @@ function idopontUjratoltes()
 
     idopontok = idopontok.filter((x, index) => {
         const d = new Date();
-        if (today && x.h < d.getHours() && x.m < d.getMinutes()) return false;
+        if (today && (x.h < d.getHours() || (x.h == d.getHours() && x.m < d.getMinutes()))) return false;
         if (index + hossz / 15 > idopontok.length) return false;
 
         if (!idopontok.slice(index, index + hossz / 15).every(y => y.free)) return false;

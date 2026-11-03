@@ -80,15 +80,6 @@ function getidopontok(idp)
 
 function getRelM(idopont) { return idopont.h * 60 + idopont.m; }
 
-// function getOccupiedIdopontok(datum, kezdes, idotartam)
-// {
-//     let idopontok = getidopontok(datum);
-//     idopontok = idopontok.filter(x => getRelM(x) >= getRelM(kezdes) && getRelM(x) < getRelM(kezdes) + idotartam);
-//     return idopontok;
-// }
-
-// function strToIdopont(str) { let i = str.split(":").map(Number); return { h: i[0], m: i[1] }; }
-
 // NOTE: Ennél roszabb megoldást nem is találhattam volna ki, de mivel működik
 //       és nincs energiám/időm újracsinálni: jó lesz.
 function idopontUjratoltes()
@@ -107,9 +98,7 @@ function idopontUjratoltes()
 
     
     let toroltek = JSON.parse(localStorage.getItem("toroltek") ?? "[]");
-    let aktivFoglalasok = foglalasokjson.filter(
-    (x, index) => !toroltek.includes(index)
-    );
+    let aktivFoglalasok = foglalasokjson.filter((_, index) => !toroltek.includes(index));
 
     let ujFoglalasok = JSON.parse(
     localStorage.getItem("foglalasok") ?? "[]").filter(x => x.torolve !== true);
@@ -125,8 +114,11 @@ function idopontUjratoltes()
     );
 
     let hossz = szolgaltatasok[szolgaltatas.selectedIndex - 1].ido;
+    let today = new Date().toISOString().split("T")[0] === datum.value;
 
     idopontok = idopontok.filter((x, index) => {
+        const d = new Date();
+        if (today && x.h < d.getHours() && x.m < d.getMinutes()) return false;
         if (index + hossz / 15 > idopontok.length) return false;
 
         if (!idopontok.slice(index, index + hossz / 15).every(y => y.free)) return false;

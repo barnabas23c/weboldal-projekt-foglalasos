@@ -105,7 +105,7 @@ const kartyamegjelenit = () => {
 
                         <p>
                             <b>Időpont:</b>
-                            ${data.idopont.ora}:${data.idopont.perc < 10 ? "0" + data.idopont.perc : data.idopont.perc}
+                            ${data.idopont.ev}.${data.idopont.honap}.${data.idopont.nap}. ${data.idopont.ora}:${data.idopont.perc < 10 ? "0" + data.idopont.perc : data.idopont.perc}
                         </p>
 
                         <p>
@@ -199,7 +199,7 @@ const rendezett = szurtfoglalasok.toSorted((a, b) => {
                 <td>${data.email}</td>
                 <td>${data.telefonszam}</td>
                 <td>
-                    ${data.idopont.ora}:${data.idopont.perc < 10 ? "0" + data.idopont.perc : data.idopont.perc}
+                ${data.idopont.ev}.${data.idopont.honap}.${data.idopont.nap}. ${data.idopont.ora}:${data.idopont.perc < 10 ? "0" + data.idopont.perc : data.idopont.perc}
                 </td>
                 <td>${fodraszok[data.fodrasz].neve}</td>
                 <td>${szolg[data.szolgaltatas].szolgaltatas}</td>

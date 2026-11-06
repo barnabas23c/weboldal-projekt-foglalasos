@@ -176,6 +176,7 @@ form.addEventListener('submit', (e) => {
     datum.setCustomValidity("");
     fodrasz.setCustomValidity("");    
     szolgaltatas.setCustomValidity("");
+    idopont.setCustomValidity("");
     if (!/^[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| )([A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+(-| ))?[A-ZÖÜÓŐÚŰÉÁÍ][a-zöüóőúűéáí]+$/.test(nev.value))
     {
         nev.setCustomValidity("Helytelen név formátum!");
@@ -220,6 +221,13 @@ form.addEventListener('submit', (e) => {
     }
 
     let foglalasok = JSON.parse(localStorage.getItem("foglalasok")) ?? [];
+    let ido= {
+            ev: Number(datum.value.split("-")[0]),
+            honap: Number(datum.value.split("-")[1]),
+            nap: Number(datum.value.split("-")[2]),
+            ora: Number(idopont.value.split(":")[0]),
+            perc: Number(idopont.value.split(":")[1])
+        };
     foglalasok.push({
         nev: nev.value,
         email: email.value,
@@ -227,15 +235,22 @@ form.addEventListener('submit', (e) => {
         fodrasz: fodrasz.selectedIndex - 1,
         szolgaltatas: szolgaltatas.selectedIndex - 1,
         custom: true,
-        idopont: {
-            ev: Number(datum.value.split("-")[0]),
-            honap: Number(datum.value.split("-")[1]),
-            nap: Number(datum.value.split("-")[2]),
-            ora: Number(idopont.value.split(":")[0]),
-            perc: Number(idopont.value.split(":")[1])
-        }
+        idopont: ido
+        
     });
     localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
+        e.preventDefault();
+
+    let url = new URL(form.action, window.location.href);
+    let adatok = new FormData(form);
+
+    for (let [nev, ertek] of adatok) {
+        url.searchParams.set(nev, ertek);
+    }
+
+    url.searchParams.set("datum", JSON.stringify(ido));
+
+    window.location.href = url.href;
 });
 
 function szolgaltatasSzures() {
